@@ -1,0 +1,61 @@
+<div class="container">
+
+    <div class="p-col-12">
+      <h1>Professores</h1>
+    </div>
+  
+    <div class="p-grid top">
+      <div class="p-col-12">
+        <p-table 
+          [value]="professor" 
+          [responsive]="true"
+          [paginator]="true" 
+          [rows]="5"
+          #tabela>
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="col-header">Nome</th>
+              <th class="col-header">Endereco</th>
+              <th class="col-header">Telefone</th>
+              <th class="col-acoes"></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-prof>
+            <tr>
+              <td class="col-data">
+                <span class="p-column-title">Nome</span>
+                {{ prof.nome }}
+              </td>
+  
+              <td class="col-data">
+                <span class="p-column-title">Endereco</span>
+                {{ prof.endereco }}
+              </td>
+  
+              <td class="col-data">
+                <span class="p-column-title">Telefone</span>
+                {{ prof.telefone }}
+              </td>
+  
+              <td class="col-acoes">
+                <a pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"
+                  [routerLink]="['/professores', prof.codigo]"></a>
+                <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top"
+                  (click)="confirmarExclusao(prof)"></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="6">
+                Nenhum professor encontrado
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  
+    <a pButton label="Novo Professor" routerLink="/professores/novo"></a>
+  
+</div>

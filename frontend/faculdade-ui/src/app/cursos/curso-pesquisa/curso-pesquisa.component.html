@@ -1,0 +1,61 @@
+<div class="container">
+
+    <div class="p-col-12">
+      <h1>Cursos</h1>
+    </div>
+  
+    <div class="p-grid top">
+      <div class="p-col-12">
+        <p-table 
+          [value]="cursos" 
+          [responsive]="true"
+          [paginator]="true" 
+          [rows]="5"
+          #tabela>
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="col-header">Curso</th>
+              <th class="col-header">Professor</th>
+              <th class="col-header">Categoria</th>
+              <th class="col-acoes"></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-curso>
+            <tr>
+              <td class="col-data">
+                <span class="p-column-title">Curso</span>
+                {{ curso.nomeCurso }}
+              </td>
+  
+              <td class="col-data">
+                <span class="p-column-title">Professor</span>
+                {{ curso.professorCurso.nome }}
+              </td>
+  
+              <td class="col-data">
+                <span class="p-column-title">Categoria</span>
+                {{ curso.categoria.nome }}
+              </td>
+  
+              <td class="col-acoes">
+                <a pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"
+                  [routerLink]="['/cursos', curso.codigo]"></a>
+                <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top"
+                  (click)="confirmarExclusao(curso)"></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="6">
+                Nenhum curso encontrado
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  
+    <a pButton label="Novo Curso" routerLink="/cursos/novo"></a>
+  
+</div>

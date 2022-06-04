@@ -1,0 +1,72 @@
+<div class="container">
+  
+    <p-card class="container card" header="{{ editando ? 'Edição de' : 'Novo' }} Professor">
+        <form #professorForm="ngForm" autocomplete="off" (ngSubmit)="salvar(professorForm)">
+    
+            <div class="p-grid">
+                <div class="p-col-12 p-md-6 p-fluid">
+                    <label>Nome do Professor</label>
+                    <input pInputText type="text" name="nomeProf"
+                    [(ngModel)]="profObject.nome" #nomeProf="ngModel" required minlength="5">
+        
+                    <app-message [control]="nomeProf.control" error="required"
+                    text="Informe o nome do professor"></app-message>
+                    <app-message [control]="nomeProf.control" error="minlength"
+                    text="Mínimo de {{ nomeProf.errors?.minlength?.requiredLength }} caracteres"></app-message>
+                </div>
+
+                <div class="p-col-12 p-md-6 p-fluid">
+                    <label>Endereço</label>
+                    <input pInputText type="text" name="endereco"
+                    [(ngModel)]="profObject.endereco" #endereco="ngModel" required minlength="5">
+        
+                    <app-message [control]="endereco.control" error="required"
+                    text="Informe o endereço do professor"></app-message>
+                    <app-message [control]="endereco.control" error="minlength"
+                    text="Mínimo de {{ endereco.errors?.minlength?.requiredLength }} caracteres"></app-message>
+                </div>
+
+                <div class="p-col-12 p-md-6 p-fluid">
+                    <label>CPF</label>
+                    <p-inputMask mask="999.999.999-99" name="cpf"
+                        [(ngModel)]="profObject.cpf" #cpf="ngModel" minlength="5" [required]="true"></p-inputMask>
+
+                    <app-message [control]="cpf.control" error="required"
+                    text="Informe o cpf do professor"></app-message>
+                    <app-message [control]="cpf.control" error="minlength"
+                    text="O texto deve ter {{ cpf.errors?.minlength?.requiredLength }} caracteres"></app-message>
+                </div>          
+
+                <div class="p-col-12 p-md-6 p-fluid">
+                    <label>RG</label>
+                    <p-inputMask mask="9999999999-9" name="rg"
+                        [(ngModel)]="profObject.rg" #rg="ngModel"  [required]="true" minlength="11"></p-inputMask>
+        
+                    <app-message [control]="rg.control" error="required"
+                    text="Informe o rg do professor"></app-message>
+                    <app-message [control]="rg.control" error="minlength"
+                    text="O texto deve ter {{ rg.errors?.minlength?.requiredLength }} caracteres"></app-message>
+                </div>
+
+                <div class="p-col-12 p-md-6 p-fluid">
+                    <label>Telefone</label>
+                    <p-inputMask mask="99999-9999" name="telefone"
+                        [(ngModel)]="profObject.telefone" #telefone="ngModel" [required]="true" minlength="8"></p-inputMask>
+        
+                    <app-message [control]="telefone.control" error="required"
+                    text="Informe o telefone do professor"></app-message>
+                    <app-message [control]="telefone.control" error="minlength"
+                    text="Mínimo de {{ telefone.errors?.minlength?.requiredLength }} caracteres"></app-message>
+                </div>
+            
+                <div class="p-col-12">
+                    <button pButton type="submit" label="Salvar" [disabled]="professorForm.invalid"></button>
+                    <button pButton type="button" label="Limpar" class="p-button-info"
+                    (click)="novo(professorForm)"></button>
+            
+                    <a [routerLink]="['/professores']">Voltar para a pesquisa</a>
+                </div> 
+            </div>
+        </form>
+    </p-card>
+</div>

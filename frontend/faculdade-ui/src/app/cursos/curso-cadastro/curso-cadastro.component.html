@@ -1,0 +1,47 @@
+<div class="container">
+  
+    <p-card class="container card" header="{{ editando ? 'Edição de' : 'Novo' }} Curso">
+      <form #cursoForm="ngForm" autocomplete="off" (ngSubmit)="salvar(cursoForm)">
+  
+        <div class="p-grid">
+          <div class="p-col-12 p-md-8 p-fluid">
+            <label>Nome curso</label>
+            <input pInputText type="text" name="nome"
+              [(ngModel)]="curso.nomeCurso" #nomeCurso="ngModel" required minlength="5">
+  
+            <app-message [control]="nomeCurso.control" error="required"
+              text="Informe o nome do curso"></app-message>
+            <app-message [control]="nomeCurso.control" error="minlength"
+              text="Mínimo de {{ nomeCurso.errors?.minlength?.requiredLength }} caracteres"></app-message>
+          </div>
+  
+          <div class="p-col-12 p-md-4 p-fluid">
+            <label>Categoria</label>
+            <p-dropdown name="categoria" [options]="categorias" [dataKey]="'codigo'"
+              placeholder="Selecione" requiredboolean [filter]="true"
+              [(ngModel)]="curso.categoria.codigo" #categoria="ngModel"></p-dropdown>
+  
+            <app-message [control]="categoria.control" error="requiredboolean"
+              text="Informe a categoria do curso"></app-message>
+          </div>
+          
+          <div class="p-col-12 p-md-12 p-fluid">
+            <label>Nome do Professor</label>
+            <p-dropdown name="nomeProfessor" [options]="professor"
+              placeholder="Selecione" requiredboolean [filter]="true"
+              [(ngModel)]="curso.professorCurso.codigo" #nomeProfessor="ngModel"></p-dropdown>
+  
+            <app-message [control]="nomeProfessor.control" error="requiredboolean"
+              text="Informe o nome do professor"></app-message>
+          </div>
+          <div class="p-col-12">
+            <button pButton type="submit" label="Salvar" [disabled]="cursoForm.invalid"></button>
+            <button pButton type="button" label="Limpar" class="p-button-info"
+              (click)="novo(cursoForm)"></button>
+    
+              <a [routerLink]="['/cursos']">Voltar para a pesquisa</a>
+          </div> 
+        </div>
+      </form>
+    </p-card>
+</div>
